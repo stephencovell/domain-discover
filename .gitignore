@@ -1,0 +1,4 @@
+brute/suffixes.txt
+brute/tlds.txt
+src/__pycache__
+config.yaml
