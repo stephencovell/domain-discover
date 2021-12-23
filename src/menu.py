@@ -12,7 +12,7 @@ import os
 from resolver import * 
 
 class Menu:
-    def askForDomain():
+    def askForDomain(self):
         domain = input("Please enter a domain name: ")
         return domain
 
@@ -20,7 +20,7 @@ class Menu:
         user_input = ""
         while str(user_input) != "Q" or str(user_input) != "q":
             self.showMenuOpt(self)
-            user_input("Please input 'q' to quit or any other key to continue.")
+            user_input = input("Please input 'q' to quit or any other key to continue: ")
 
     def showMenuOpt(self, errormsg = ""):
         # Clear the screen
@@ -74,30 +74,30 @@ class Menu:
 
                     # Lets lookup the NS
                     resolve = Resolver()
-                    resolve.resolveNS()
-                    resolve.resolveMX()
-                    resolve.resolveA()
+                    resolve.resolveNS(domain)
+                    resolve.resolveMX(domain)
+                    resolve.resolveA(domain)
                 case 2: # Resolve NS
                     # Lets ask the user for domain to target
                     domain = self.askForDomain()
 
                     # Lets lookup the NS
                     resolve = Resolver()
-                    resolve.resolveNS()
+                    resolve.resolveNS(domain)
                 case 3: # Resolve MX
                     # Lets ask the user for domain to target
                     domain = self.askForDomain()
 
                     # Lets lookup the NS
                     resolve = Resolver()
-                    resolve.resolveMX()
+                    resolve.resolveMX(domain)
                 case 4: # Resolve A
                     # Lets ask the user for domain to target
                     domain = self.askForDomain()
 
                     # Lets lookup the A
                     resolve = Resolver()
-                    resolve.resolveA()
+                    resolve.resolveA(domain)
                 case 5: # Ip Lookup
                     print ("Feature under development.")
                 case _: 
