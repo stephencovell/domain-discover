@@ -1,4 +1,4 @@
-# Domain Discover
+# Domain Discovery
 
 Created by Stephen Covell on 21/12/21 @ 1200 hrs.
 
