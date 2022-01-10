@@ -2,3 +2,10 @@ brute/suffixes.txt
 brute/tlds.txt
 src/__pycache__
 config.yaml
+src/sub_buteforce.py
+saves/
+src/dnsdump.py
+src/workspace.code-workspace
+.DS_Store
+t.txt
+Dockerfile

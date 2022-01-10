@@ -11,7 +11,6 @@
 import yaml
 
 def read_config():
-    with open ('../config.yaml', "r") as f:
-        return yaml.safe_load(f)
-
-read_config()
+    with open ('config.yaml', "r") as f:
+        config = yaml.safe_load(f)
+        return config
