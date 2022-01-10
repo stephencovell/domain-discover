@@ -61,14 +61,14 @@ class Menu:
         Discover sub-domains and domains on a given domain
 
         Options:
-        (1) Full Scan
+        (1) Full Scan (writes output to /saves/)
         (2) Resolve NS
         (3) Resolve MX
         (4) Resolve A Records
         (5) Reverse IP Lookup (Under Development)
         (6) Search the WWW (Under Development)
         (7) Subdomain Bruteforce (Under Development)
-        (8) Censys
+        (8) Censys (writes output to /saves/)
         """)
 
         # Getting user input
@@ -112,6 +112,10 @@ class Menu:
                     resolve.resolveNS(domain)
                     resolve.resolveMX(domain)
                     resolve.resolveA(domain)
+
+                     # perform the API request
+                    c = Censys(domain)
+                    result = c.peformAPIRequest()
                 case 2: # Resolve NS
                     # Lets ask the user for domain to target
                     domain = self.askForDomain()
