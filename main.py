@@ -2,7 +2,7 @@
 #  
 # Created by Stephen Covell on 21/12/21 @ 12:00 Hrs
 #
-# Project Title: Domain Discover
+# Project Title: Domain Discovery
 # Project Description:
 #   To discover sub-domains and domains on a given domain.
 #
@@ -16,7 +16,7 @@ from menu import *
 
 def main():
     m = Menu()
-    m.displauMenuOpt()
+    m.displayMenuOpt()
 
 if __name__ == "__main__":
     main()
