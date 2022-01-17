@@ -74,7 +74,7 @@ class Scan:
             # the scan
             try:
                 #  '-v -sS -sV -sC -sU -A -O' root privilegs needed
-                res = nmScan.scan(address, '21-1024', _Result=self.scanResults())
+                res = nmScan.scan(address, '21-1024')
             except:
                 print("Error")
 
