@@ -59,7 +59,7 @@ class Scan:
         self._uniquevalues = self._df['IP'].unique()
 
         # Need a way to append data...
-        self._apendnmap = DataAppend()
+        self._apendnmap = DataAppend(self._workbook)
 
     def simpleScan(self):
         """
@@ -102,7 +102,7 @@ class Scan:
                             else:
                                 httpheader = r.request.headers
 
-                        self._apendnmap.nmap_append(self._workbook, self._ws, address,
+                        self._apendnmap.nmap_append(self._ws, address,
                         nmScan[host].hostname(),
                         nmScan[host].state(),
                         proto,
