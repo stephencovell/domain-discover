@@ -43,6 +43,20 @@ class Resolver:
         except socket.herror:
             return None, None, None
 
+    def reverseNameLookup(self, ip):
+        qname = dns.reversename.from_address(ip)
+        try:
+            answer = dns.resolver.query(qname, 'PTR')
+        except:
+            answer = ""
+
+        #for rr in answer:
+        #    print(rr)
+
+        return answer
+
+    
+
 
 # could come in handy
 #for ipval in a_result:
