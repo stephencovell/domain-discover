@@ -20,6 +20,9 @@ from resolver import *
 from xls import * 
 
 class DataAppend:
+    def __init__(self, workbook):
+        self._workbook = workbook
+
     def d_append(self, targetdomain="", hostname="", ipaddr="", type="", reversedns="", netblockowner="", country="", source=""):
         """
         d_append(self, targetdomain="", hostname="", ipaddr="", type="", reversedns="", netblockowner="", country="", source="")
@@ -49,3 +52,20 @@ class DataAppend:
         e = Excel()
         ws = e.createTargetSheet()
         e.addTargetSheetEntry(ws, p_target, p_hostname, p_ipaddr, p_type, p_reversedns, p_netblockowner, p_country, p_source)
+
+    def nmap_append(self, sheet, target="", hostname="", state="", protocol="", name="", product="", extrainfo="", reason="", version="", conf="", port="", os=""):
+       
+        p_target = str(target)
+        p_hostname = str(hostname)
+        p_protocol = str(protocol)
+        p_name = str(name)
+        p_product = str(product)
+        p_state = str(state)
+        p_extrainfo = str(extrainfo) 
+        p_reason = str(reason)
+        p_version = str(version)
+        p_conf = str(conf)
+        p_port = int(port)
+        p_os = str(os)
+
+        self._workbook.addNMAPSheetEntry(sheet, p_target, p_hostname, p_state, p_protocol, p_name, p_product, p_extrainfo, p_reason, p_version, p_conf, p_port, p_os)
