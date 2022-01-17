@@ -7,7 +7,7 @@
 #   To discover sub-domains and domains on a given domain.
 #
 # ========================================================
-import os
+# import os
 
 # Lets import other classes
 from resolver import * 
@@ -35,7 +35,7 @@ class Menu:
         A loop to show the menu. User can input 'Q/q' to exit the program
         """
         user_input = ""
-        while str(user_input) != "Q" or str(user_input) != "q":
+        while (user_input.upper() != "Q"):
             self.showMenuOpt(self)
             user_input = input("Please input 'q' to quit or any other key to continue: ")
 
@@ -48,7 +48,7 @@ class Menu:
         if string isn't null/empty. Options can be expanded.
         """
         # Clear the screen
-        os.system('cls')
+        # os.system('cls')
 
         # Display any errors
         if str(errormsg) != "":
