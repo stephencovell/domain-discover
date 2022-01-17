@@ -12,7 +12,11 @@ import os
 # Lets import other classes
 from resolver import * 
 from censys import * 
+from scan import * 
+from xls import *
 class Menu:
+    def __init__(self):
+        self._exc = Excel()
 
     def askForDomain(self):
         """
@@ -52,7 +56,7 @@ class Menu:
 
         # Menu properties
         min_menu_option = 1
-        max_menu_option = 8
+        max_menu_option = 9
 
         # Displaying the menu
         # !!!! BE SURE TO UPDATE MENU PROPERTIES WHEN ADDING OPTIONS !!!
@@ -69,6 +73,7 @@ class Menu:
         (6) Search the WWW (Under Development)
         (7) Subdomain Bruteforce (Under Development)
         (8) Censys (writes output to /saves/)
+        (9) NMAP Scan
         """)
 
         # Getting user input
@@ -153,8 +158,12 @@ class Menu:
                     domain = self.askForDomain()
 
                     # perform the API request
-                    c = Censys(domain)
+                    c = Censys(self._exc, domain)
                     result = c.peformAPIRequest()
+                case 9:
+                    # NMAP scan
+                    scn = Scan(self._exc)
+                    scn.simpleScan()
                 case _: 
                     print ("Something went wrong. Sorry.")
 

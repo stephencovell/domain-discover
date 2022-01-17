@@ -9,10 +9,12 @@
 # ========================================================
 
 from openpyxl import Workbook
+from openpyxl.reader.excel import load_workbook
 from datetime import datetime
 
 # bad practise, but i need a quck work around
 #wb = Workbook()
+# https://stackoverflow.com/questions/37594707/openpyxl-python-iterating-through-large-data-list
 
 class Excel:
     """
@@ -34,10 +36,10 @@ class Excel:
         """
 
         # Lets create the required sheets
-        self.createSheets()
+        #self.target_sheet = self.createTargetSheet()
 
         # Lets save the file
-        self._wb.save(self._wbname)
+        #self._wb.save(self._wbname)
 
 
     def createSheets(self):
@@ -63,13 +65,37 @@ class Excel:
         #ws['N1'].value = 'Conf'
         return ws
 
+    def createNMAPSheet(self):
+        nmapsheet = self._wb.create_sheet("NMAP")
+        nmapsheet['A1'].value = 'Target'
+        nmapsheet['B1'].value = 'Hostname'
+        nmapsheet['C1'].value = 'State'
+        nmapsheet['D1'].value = 'Protocol'
+        nmapsheet['E1'].value = 'Name'
+        nmapsheet['F1'].value = 'Product'
+        nmapsheet['G1'].value = 'Extra Info'
+        nmapsheet['H1'].value = 'Reason'
+        nmapsheet['I1'].value = 'Version'
+        nmapsheet['J1'].value = 'Conf'
+        nmapsheet['K1'].value = 'Port'
+        nmapsheet['L1'].value = 'HTTP/HTTPS Header'
+        self._wb.save(self._wbname)
+        return nmapsheet
+
+    def gatherUniqueIps(self):
+        ws = self._wb.get_sheet_by_name(name = 'Target') 
+        result = ws['A1'].unique()
+        return result
+
+
     #def createNMapSheet(self):
     #    ws = wb.create_sheet("NMAP")
     #    ws = wb.active
     #    return ws
     
-    #def openWB(self):
-    #    wb.load_workbook('saves/test.xlsx')
+    def openWB(self):
+        # for testing
+        self._wb = load_workbook('saves/10-01-2022 21-21-49.xlsx')
 
     #def test(self):
     #    self.createSheets()
@@ -77,6 +103,11 @@ class Excel:
 
     def addTargetSheetEntry(self, ws, targetdomain="", hostname="", ipaddr="", type="", reverseDNS="", netblockowner="", country="", source=""):
         ws.append([targetdomain, hostname, ipaddr, type, reverseDNS, netblockowner, country, source])
+        self._wb.save(self._wbname)
+
+    def addNMAPSheetEntry(self, sheet, target="", hostname="", state="", protocol="", name="", product="", extrainfo="", reason="", version="", conf="", port="", os=""):
+        print("appending")
+        sheet.append([target, hostname, state, protocol, name, product, extrainfo, reason, version, conf, port, os])
         self._wb.save(self._wbname)
 
 #e = Excel()
