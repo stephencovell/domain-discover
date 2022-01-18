@@ -14,9 +14,11 @@ from resolver import *
 from censys import * 
 from scan import * 
 from xls import *
+from sub_buteforce import *
 class Menu:
     def __init__(self):
         self._exc = Excel()
+        self._ts = self._exc.createTargetSheet()
 
     def askForDomain(self):
         """
@@ -71,7 +73,7 @@ class Menu:
         (4) Resolve A Records
         (5) Reverse IP Lookup (Under Development)
         (6) Search the WWW (Under Development)
-        (7) Subdomain Bruteforce (Under Development)
+        (7) Subdomain Bruteforce
         (8) Censys (writes output to /saves/)
         (9) NMAP Scan
         """)
@@ -147,18 +149,18 @@ class Menu:
                 case 6: # Search WWWW
                     print ("Feature under development.")
                 case 7: # Subdomain bruteforce
-                    print ("Feature under development.")
                     # Lets ask the user for domain to target
-                    #domain = self.askForDomain()
+                    domain = self.askForDomain()
 
                     # And the magic
-                    #sub_bf = Bruteforce()
+                    bf = Bruteforce(self._exc, self._ts, domain)
+                    bf.scanDomain()
                 case 8:
                     # Lets ask the user for domain to target
                     domain = self.askForDomain()
 
                     # perform the API request
-                    c = Censys(self._exc, domain)
+                    c = Censys(self._exc, self._ts, domain)
                     result = c.peformAPIRequest()
                 case 9:
                     # NMAP scan
