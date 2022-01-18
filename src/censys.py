@@ -26,7 +26,7 @@ class Censys:
     Registration for a Censys account: https://search.censys.io/api
     """
 
-    def __init__(self, p_domain):
+    def __init__(self, p_workbook, p_worksheet, p_domain):
         """
         __init__(self, p_domain)
         Paramters:
@@ -46,6 +46,10 @@ class Censys:
         self._domain = p_domain
         self._perpage = 100
         self._virtualhosts = "INCLUDE" 
+
+        # workbook
+        self._workbook = p_workbook
+        self._worksheet = p_worksheet
 
     def checkCensysConfig(self):
         """
@@ -124,7 +128,7 @@ class Censys:
         elif (p_data["code"] == 200):# great sucess
             for value in p_data["result"]["hits"]:
                 # Declare a new object
-                row = DataAppend()
+                row = DataAppend(self._workbook)
 
                 # Could be an error with no input
                 try:
@@ -146,6 +150,7 @@ class Censys:
 
                 # appending data to spreadsheet :)
                 row.d_append(
+                    self._worksheet,
                     targetdomain=self._domain,
                     hostname=t_hostname,
                     ipaddr=value["ip"],
