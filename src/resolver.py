@@ -26,25 +26,30 @@ class Resolver:
         self.resolveDNS(website, 'A')
 
     def resolveDNS(self, website, type):
-        print('Resolving ' + str(type) + '...')
+        print('Resolving ' + website + ' ' + str(type) + '...')
 
-        dns_result = dns.resolver.resolve(website, type)
+        try:
+            dns_result = dns.resolver.resolve(website, type)
+        except:
+            dns_result = ""
 
         for ipval in dns_result:
             print(ipval.to_text())
 
-        print('\n')
-
         return dns_result
         
-    def reverseIpLookup(addr):
+    def reverseIpLookup(self, addr):
         try:
             name, alias, addresslist = socket.gethostbyaddr(addr)
         except socket.herror:
             return None, None, None
 
     def reverseNameLookup(self, ip):
-        qname = dns.reversename.from_address(ip)
+        try:
+            qname = dns.reversename.from_address(str(ip))
+        except:
+            answer = ""
+
         try:
             answer = dns.resolver.query(qname, 'PTR')
         except:
